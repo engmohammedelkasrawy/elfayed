@@ -1,0 +1,135 @@
+<html lang="ar" dir="rtl">{% load static %}
+
+<head>
+
+
+  <title>{{title}}</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+
+  <!-- bootstrap -V 5.1.3x -->
+  <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css">
+
+  <!-- CSS Style and Aos Animation library -->
+  <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/pages.css">
+
+
+  <!-- font awesome -->
+  <link href="{% static 'main/' %}fontawesome/css/all.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+  <div href="#" class="logo"> <img src="{% static 'main/' %}Images/undraw_profile_pic_ic-5-t.svg" alt="">
+  </div>
+
+  <div class="containe">
+    <div class="row">
+      {% include 'student/sidebar.html' %}
+    </div>
+
+    <div class="main active">
+
+      <div class="topbar">
+
+        <div class="toggle">
+
+          <i class="bi bi-list"></i>
+
+        </div>
+      </div>
+
+      <div class="classText">
+
+        <h2> مرحبا بك في صفحتك الشخصية </h2>
+	
+
+      </div>
+
+      <!-- cards -->
+      <div class=" home-stats text-center">
+
+
+
+        <div class="row DashCards active">
+          <div class="col-md-6">
+            <a href="{% url 'off_videos' %}">
+              <div class="stat tmembers">
+                <span class="logoIcon"> <img src="{% static 'main/' %}Images/undraw_video_call_re_4p26.svg" alt=""></span>
+                <div class="info">
+                  <strong>الفيديوهات المحجوزة</strong>
+                  <span> {{request.user.student.get_lesson_unactive.count}} فيديو</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6">
+            <a href="{% url 'on_videos' %}">
+              <div class="stat tpending">
+                <span class="logoIcon"> <img src="{% static 'main/' %}Images/undraw_video_call_re_4p26.svg" alt=""></span>
+                <div class="info">
+                  <strong>الفيديوهات الخاصة بك</strong>
+                  <span>{{request.user.student.get_lesson_active.count}} فيديو</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6">
+            <a href="{% url 'quizzes' %}">
+              <div class="stat titems">
+                <span class="logoIcon"> <img src="{% static 'main/' %}Images/undraw_my_answer_re_k4dv.svg" alt=""></span>
+
+                <div class="info">
+                  <strong> الكويزات والاختبارات الشاملة</strong>
+                  <span>{{quizes.count}} كويزات</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+
+          <div class="col-md-6">
+            <a href="{% url 'quiz_result' %}">
+              <div class="stat tcomments">
+                <span class="logoIcon"> <img src="{% static 'main/' %}Images/undraw_my_answer_re_k4dv.svg" alt=""></span>
+                <div class="info">
+                  <strong> درجات الكويزات والاختبارات</strong>
+                  <span>{{request.user.student.get_grade}} درجة</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  </div>
+
+
+
+  <!-- Scripts Links  -->
+
+  <script type="text/javascript" src="{% static 'main/' %}js/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="{% static 'main/' %}js/lib/bootstrap.bundle.min.js"></script>
+
+
+  <!--load all styles  fontawesome-->
+  <script defer src="{% static 'main/' %}fontawesome/js/all.js"></script>
+  <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>{% load static %}
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <title>{{title}}</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- bootstrap -V 5.1.3x -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css">
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/RegisterVideos.css">
+
+    <!-- font awesome-->
+    <link href="{% static 'main/' %}fontawesome/css/all.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+
+    <!-- Scroll Right -->
+    <div id="progressbar"></div>
+    <div id="scrollPath"></div>
+
+
+
+    <!-- /////////////////navbar Register page ///////////////////// -->
+
+    <nav class="navbar navbar-expand-lg position-sticky top-0 w-100 en" style="z-index: 99;">
+        <div class="container">
+            <a href="#" class="logo"> <img src="{% static 'main/' %}Images/geology.png" alt=""></a>
+            <h1>Alfayed</h1>
+
+            <div class="navbar-nav ms-auto">
+
+                <a class="blue btn btn-primary" href="{% url 'profile' %}">
+                    الصفحة الشخصية <i class="bi bi-person-check-fill"></i></a>
+                    
+                    {% if request.user.is_superuser %}
+                        <a class="blue btn btn-primary" href="/dashboard/">
+                            لوحة التحكم  <i class="bi bi-person-check-fill"></i></a>
+                    {% endif %}
+                        
+                <a class=" red btn btn-outline-danger" href="{% url 'logout_user' %}"> تسجيل الخروج <i
+                        class="bi bi-box-arrow-in-right"></i> </a>
+                <a class=" btn-toggle  btn btn-info mode"> 🌞 🌙 </a>
+            </div>
+
+        </div>
+    </nav>
+
+
+
+
+    <section class="start">
+
+        <div class="container categories">
+
+            <div class="bubbles">
+                <span style="--i:11;"></span>
+                <span style="--i:12;"></span>
+                <span style="--i:24;"></span>
+                <span style="--i:10;"></span>
+                <span style="--i:14;"></span>
+                <span style="--i:23;"></span>
+                <span style="--i:18;"></span>
+                <span style="--i:16;"></span>
+                <span style="--i:19;"></span>
+                <span style="--i:20;"></span>
+                <span style="--i:22;"></span>
+                <span style="--i:25;"></span>
+                <span style="--i:18;"></span>
+                <span style="--i:21;"></span>
+                <span style="--i:15;"></span>
+                <span style="--i:13;"></span>
+                <span style="--i:26;"></span>
+                <span style="--i:17;"></span>
+                <span style="--i:13;"></span>
+                <span style="--i:28;"></span>
+                <span style="--i:11;"></span>
+                <span style="--i:12;"></span>
+                <span style="--i:24;"></span>
+                <span style="--i:10;"></span>
+                <span style="--i:14;"></span>
+                <span style="--i:23;"></span>
+                <span style="--i:18;"></span>
+                <span style="--i:16;"></span>
+                <span style="--i:19;"></span>
+                <span style="--i:20;"></span>
+                <span style="--i:22;"></span>
+                <span style="--i:25;"></span>
+                <span style="--i:18;"></span>
+                <span style="--i:21;"></span>
+                <span style="--i:15;"></span>
+                <span style="--i:13;"></span>
+                <span style="--i:26;"></span>
+                <span style="--i:17;"></span>
+                <span style="--i:13;"></span>
+                <span style="--i:28;"></span>
+
+            </div>
+
+            <div class="row" style="justify-content:center ;">
+                <div class="centerText">
+                    <h2> مرحبا بك يا {{request.user.student.fullName}} </h2>
+                    <p>يمكنك الاشتراك الأن في جميع الفيديوهات لكل الأبواب والفروع</p>
+                </div>
+                <!-- First  Card Register -->
+                {% for branch in branchs %}
+                <div class="col-md-6 registerCard">
+                    <span>{{branch.name}} </span>
+                    <form class="nav" method="post">
+                        {% csrf_token %}
+                        <label for="btn" class="button firstBtn btn bttn btn-primary dropdown-btn"> محتويات الكورس
+                            <span class="fas fa-caret-down"></span>
+                        </label>
+
+                        <ul class="menu">
+                            {% for unit in  branch.get_units %}
+                            <li>
+                                <label class=" dropdown-btn">{{unit.name}}
+                                    <span class="fas fa-caret-down"></span>
+                                </label>
+                                <ul>
+                                    {% for lesson in unit.get_lessons %}
+                                    <li class="dropdown-item">
+                                        <label for="input1">{{lesson.name}}</label>
+                                        
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <input type="hidden" id="input1" name="branch_id" value="{{branch.id}}">
+                        <button type="submit" class="btn bttn btn-success">  الاشتراك !</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+    <!--////////////////////// Bootstrab files and main js ////////////////////////// -->
+
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/bootstrap.bundle.min.js"></script>
+    <script defer src="{% static 'main/' %}fontawesome/js/all.js"></script>
+    <!--load all styles -->
+
+    <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>
+
+
+</body>
+
+</html>

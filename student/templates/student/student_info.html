@@ -1,0 +1,164 @@
+<!DOCTYPE html>{% load static %}
+<html lang="ar" dir="rtl">
+
+<head>
+    <!--bootstrap -V 5.1.3x-->
+    <title> {{title}}</title>
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <!-- bootstrap -V 5.1.3x -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css" />
+
+    <!-- CSS Style and Aos Animation library -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/pages.css" />
+
+    <!-- font awesome -->
+    <link href="{% static 'main/' %}fontawesome/css/all.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <a href="#" class="logo"> <img src="{% static 'main/' %}Images/undraw_profile_pic_ic-5-t.svg" alt=""></a>
+    <div class="containe">
+        <div class="row">
+            {% include 'student/sidebar.html' %}
+        </div>
+
+        <div class="main active">
+
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="bi bi-list"></i>
+                </div>
+            </div>
+
+            <div class="classText">
+
+                <h2> الملف الشخصي الخاص بك </h2>
+            </div>
+
+
+            <div class="information">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 infoCustomize">
+                            <div class="card">
+
+                                <h5 class="card-header one "> البيانات الشخصية </h5>
+
+                                <div class="card-body">
+
+
+                                    <ul class="list-unstyled card-text" style="color:black">
+
+                                        <li>
+                                            <div class="infoBlock">
+                                                <i class="i fas fa-user"></i>
+                                                <span>الأسم كاملا:</span>
+                                            </div>
+                                            {{request.user.student.fullName}}
+                                        </li>
+
+                                        <li>
+                                            <div class="infoBlock">
+                                                <i class="i bi bi-telephone-fill"></i>
+                                                <span>رقم الهاتف:</span>
+                                            </div> {{request.user.username}}
+                                        </li>
+
+                                        <li>
+                                            <div class="infoBlock">
+                                                <i class="i bi bi-telephone-fill"></i>
+                                                <span>رقم هاتف ولي الأمر: </span>
+                                            </div> {{request.user.student.ParentPhone}}
+                                        </li>
+
+                                        <li>
+                                            <div class="infoBlock">
+                                                <i class="i fa fa-calendar"></i>
+                                                <span>الصف الدراسي : </span>
+                                            </div>
+                                            {{request.user.student.year}}
+
+                                        </li>
+
+                                        <li>
+                                            <div class="infoBlock">
+                                                <i class="i fa fa-tags"></i>
+                                                <span>العنوان كاملا :</span>
+                                            </div>
+                                            {{request.user.student.address}}
+                                        </li>
+
+                                        
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-10 infoCustomize">
+                            <div class="card">
+
+                                <h5 class="card-header one "> بيانات المستوي الدراسي </h5>
+
+                                <div class="card-body">
+
+
+
+                                    <ul class=" list-unstyled card-text" style="color:black">
+
+                                        <li>
+                                            <div class="infoBlock">
+                                                <i class="i bi bi-play-btn-fill"></i>
+                                                <span> عدد الفيديوهات : </span>
+                                            </div> {{request.user.student.get_lesson_active.count}} فيديو
+                                        </li>
+
+                                        <li>
+                                            <div class="infoBlock">
+                                                <i class=" i bi bi-card-text"></i>
+                                                <span>عدد الكويزات :</span>
+                                            </div> {{quizes.count}} كويز
+                                        </li>
+
+                                        <li>
+                                            <div class="infoBlock">
+                                                <i class=" i fa fa-calendar"></i>
+                                                <span> تاريخ الأشتراك :</span>
+                                            </div>
+                                            {{request.user.student.created|date:"j/m/Y "}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Scripts Links  -->
+
+        <script type="text/javascript" src="{% static 'main/' %}js/lib/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'main/' %}js/lib/bootstrap.bundle.min.js"></script>
+
+
+        <!--load all styles  fontawesome-->
+        <script defer src="{% static 'main/' %}fontawesome/js/all.js"></script>
+        <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>
+
+</body>
+
+</html>

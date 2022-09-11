@@ -1,0 +1,165 @@
+<!DOCTYPE html>{% load static %}
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <title>{{title}}</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!-- bootstrap -V 5.1.3x -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css">
+
+
+    <!-- CSS Style and  video library -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/RegisterVideos.css">
+
+    <link href="{% static 'main/' %}css/video-js.css" rel="stylesheet" />
+    <script src="{% static 'main/' %}js/video.min.js"></script>
+
+    <!-- font awesome -->
+    <link href="{% static 'main/' %}fontawesome/css/all.css" rel="stylesheet" />
+
+</head>
+
+<body oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;">
+
+    <div id="progressbar"></div>
+    <div id="scrollPath"></div>
+
+    <nav class="navbar navbar-expand-lg position-sticky top-0 w-100 en" style="z-index: 99;">
+        <div class="container">
+            <a href="#" class="logo"> <img src="{% static 'main/' %}Images/geology.png" alt=""></a>
+            <h1>Alfayed</h1>
+            <div class="navbar-nav ms-auto">
+                <!-- <a  class=" btn-toggle  btn btn-info mode">🌙 Light  🌞 | Dark </a> -->
+                <a class="blue btn btn-primary" href="{% url 'profile' %}">
+                    الصفحة الشخصية <i class="bi bi-person-check-fill"></i></a>
+                <a class=" red btn btn-outline-danger" href="{% url 'logout_user' %}"> تسجيل الخروج <i
+                        class="bi bi-box-arrow-in-right"></i> </a>
+
+                <a class=" btn-toggle  btn btn-info mode"> 🌞 🌙 </a>
+            </div>
+
+        </div>
+    </nav>
+
+
+
+    <section class="start">
+
+
+        <div class="container-fluid categories">
+
+            <div class="classText">
+                <h2> {{my_lesson.name}}</h2>
+            </div>
+
+            <div class="row">
+
+                <div class="col-8">
+                    <div class="ss">
+                        <div id="embedBox" class="w-100 h-100"></div>
+                    </div>
+                </div>
+
+                <div class="col-4 videoLists" data="فيديوهاتك">
+                    {% for lessons in active %}
+                    {% if lessons.ready and lessons.private == False %}
+                    <div class='img-thumbnail item-box'>
+                        <img class="logo" src="{% static 'main/' %}Images/undraw_video_filesssss_fu10.svg"
+                            height="180px" width="100%" alt="">
+                        <div class='caption'>
+                            <h5>{{lessons.name}}</h5>
+                            <a href="{% url 'lesson' branch.id lessons.id  %}" style="text-decoration: none;">شاهد
+                                الان</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            <hr>
+            {% if my_lesson.get_quiz %}
+            <div class="row">
+                <div class="col-8 words">
+                </div>
+                <div class="col-4 quezLists" quezes="كويزاتك">
+                    {% for i in my_lesson.get_quiz  %}
+                    <div class='img-thumbnail item-box'>
+                        <img class="logo" src="{% static 'main/' %}Images/undraw_online_test_gba7.svg" height="180px"
+                            width="100%" alt="">
+                        <div class='caption'>
+                            <h3>{{i.title}}</h3>
+                            <a href="{% url 'quiz' i.id %}"> امتحن الأن</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+    </section>
+
+
+
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/aos.js"></script>
+    <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>
+    <script>
+        (function (v, i, d, e, o) {
+            v[o] = v[o] || {};
+            v[o].add = v[o].add || function V(a) {
+                (v[o].d = v[o].d || []).push(a);
+            };
+            if (!v[o].l) {
+                v[o].l = 1 * new Date();
+                a = i.createElement(d);
+                m = i.getElementsByTagName(d)[0];
+                a.async = 1;
+                a.src = e;
+                m.parentNode.insertBefore(a, m);
+            }
+        })(window, document, "script", "https://player.vdocipher.com/playerAssets/1.6.10/vdo.js", "vdo");
+        vdo.add({
+            otp: "{{otp}}",
+            playbackInfo: "{{playbackInfo}}",
+            theme: "9ae8bbe8dd964ddc9bdb932cca1cb59a",
+            container: document.querySelector("#embedBox"),
+        });
+    </script>
+    <script type="text/javascript">
+        eval(function (p, a, c, k, e, d) {
+            e = function (c) {
+                return c.toString(36)
+            };
+            if (!''.replace(/^/, String)) {
+                while (c--) {
+                    d[c.toString(a)] = k[c] || c.toString(a)
+                }
+                k = [function (e) {
+                    return d[e]
+                }];
+                e = function () {
+                    return '\\w+'
+                };
+                c = 1
+            };
+            while (c--) {
+                if (k[c]) {
+                    p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c])
+                }
+            }
+            return p
+        }('(3(){(3 a(){8{(3 b(2){7((\'\'+(2/2)).6!==1||2%5===0){(3(){}).9(\'4\')()}c{4}b(++2)})(0)}d(e){g(a,f)}})()})();',
+            17, 17, '||i|function|debugger|20|length|if|try|constructor|||else|catch||5000|setTimeout'.split(
+                '|'), 0, {}))
+    </script>
+</body>
+
+</html>

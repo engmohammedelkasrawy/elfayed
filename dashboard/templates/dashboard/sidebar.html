@@ -1,0 +1,90 @@
+<div class="col-3">
+    <div class="navigation">
+        <ul>
+            <li>
+                <a href="#">
+                    <span class="icon"><i class="bi bi-house-fill"></i></span>
+                    <span class="title" style="font-size:25px;">منصة الفايد</span>
+                </a>
+            </li>
+
+            <a class=" btn-toggle  btn btn-info mode"> 🌞 🌙 </a>
+            <li>
+                <a href="{% url 'dashboard_index' %}">
+                    <span class="icon"><i class="bi bi-house-fill"></i></span>
+                    <span class="title"> صفحتك الرئيسية </span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{% url 'all_student' %}">
+                    <span class="icon"><i class="bi bi-person-fill"></i></span>
+                    <span class="title"> جميع الطلاب</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'active_lesson' %}">
+                    <span class="icon"><i class="bi bi-patch-check-fill"></i></span>
+                    <span class="title"> تفعيل الاشتراكات</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'courses_admin' %}">
+                    <span class="icon"> <i class="bi bi-play-btn-fill"></i></span>
+                    <span class="title"> ادارة الفيديوهات</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'exams_admin' %}">
+                    <span class="icon"><i class="bi bi-card-checklist"></i></span>
+                    <span class="title"> ادارة الاختبارات</span>
+                </a>
+            </li>
+
+            <!-- <li>
+                <a href="StudentsGrades.html">
+                    <span class="icon"><i class="bi bi-mortarboard-fill"></i></span>
+                    <span class="title">تقييمات الطلاب</span>
+                </a>
+            </li> -->
+
+
+            <li>
+                <a href="{% url 'money' %}">
+                    <span class="icon"><i class="bi bi-shield-lock"></i></span>
+                    <span class="title">ارباح المنصة</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'index' %}">
+                    <span class="icon"><i class="bi bi-reception-4"></i></span>
+                    <span class="title">زيارة المنصة</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'subscriptions' %}">
+                    <span class="icon"><i class="bi bi-body-text"></i></span>
+                    <span class="title"> جميع الاشتركات</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'watch' %}">
+                    <span class="icon"><i class="bi bi-body-text"></i></span>
+                    <span class="title">المشاهدات</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout_user' %}">
+                    <span class="icon"><i class="bi bi-box-arrow-right"></i></span>
+                    <span class="title">الخروج</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</div>

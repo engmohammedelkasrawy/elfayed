@@ -1,0 +1,84 @@
+<!DOCTYPE html>{% load static %}
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <title> Add Branch</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <!-- bootstrap -V 5.1.3x -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css" />
+
+    <!-- CSS Style and Aos Animation library -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/Forms.css" />
+
+    <!-- font awesome -->
+    <link href="{% static 'main/' %}fontawesome/css/all.css" rel="stylesheet" />
+
+</head>
+
+
+<body>
+
+
+    <img class="wave" src="{% static 'main/' %}Images/wave.png">
+    <div class="container">
+
+
+        <div class="register-content">
+
+            <form id="form" method="post" class="form-horizontal">
+                {% csrf_token %}
+                <img src="{% static 'main/' %}Images/undraw_profile_pic_ic-5-t.svg">
+                <h2 class="title">اضافة فرع</h2>
+                <div id="PhoneNumber" class="input-div">
+                    <div class="i">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+                    <div class="div">
+                        <h5>اسم الفرع</h5>
+                        <input id="phone" type="text" class="input" name="name" required>
+
+                    </div>
+                </div>
+                <div class="div">
+                    <select class="select" class="input" name="year">
+                        <option selected>اختر الصف الدراسي</option>
+                        <option value="1">الصف الاول الثانوي</option>
+                        <option value="2">الصف الثاني الثانوي</option>
+                        <option value="3">الصف الثالث الثانوي</option>
+
+                    </select>
+                </div>
+                <div id="PhoneNumber" class="input-div">
+
+                    <div class="i">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+
+                    <div class="div">
+                        <h5>سعر الكورس</h5>
+                        <input id="phone" type="text" class="input" name="price" required>
+
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="is_free" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        كورس مجاني
+                    </label>
+                    
+                </div>
+                <input type="submit" class="btnLogin" style="background-color: #007bff;" value="انشاء فرع ">
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>
+
+</body>
+
+</html>

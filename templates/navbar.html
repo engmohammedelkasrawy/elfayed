@@ -1,0 +1,55 @@
+{% load  static %}
+{% url 'index' as index %}
+{% url 'profile' as profile %}
+{% url 'register_videos' as register_videos %}
+
+
+{% if request.path == profile %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/userProfile.css">
+<header class="header  en">
+        <a href="#" class="logo"> <img src="{% static 'main/' %}Images/undraw_profile_pic_ic-5-t.svg" alt=""></a>
+        <ul class="navigation">
+                <li><a class="  btn btn-primary p-2 me-3 fw-bold" href="{% url 'register_videos' %}"> تسجيل في درس جديد
+                        </a>
+                </li>
+                <li><a class=" red btn btn-outline-danger" href="{% url 'logout_user' %}"> تسجيل الخروج <i
+                                        class="bi bi-box-arrow-in-right"></i> </a></li>
+        </ul>
+</header>
+
+
+{% elif request.path == register_videos  %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/RegisterVideos.css">
+<header class="header  en" style=" z-index: 999">
+        <a href="#" class="logo"> <img src="{% static 'main/' %}Images/undraw_profile_pic_ic-5-t.svg" alt=""></a>
+        <ul class="navigation">
+                <li><a class="blue btn btn-primary" href="{% url 'profile' %}"> الصفحة الشخصية <i
+                                        class="bi bi-person-check-fill"></i></a></li>
+                <li><a class=" red btn btn-outline-danger" href="{% url 'logout_user' %}"> تسجيل الخروج <i
+                                        class="bi bi-box-arrow-in-right"></i> </a></li>
+        </ul>
+</header>
+
+
+{% elif request.path == index %}
+<link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+<nav class="navbar navbar-expand-lg position-absolute w-100 en" style="z-index: 99999;">
+        <div class="container">
+                <a href="#" class="logo"> <img src="{% static 'main/' %}Images/111.jpeg" alt=""></a>
+
+                <div class="navbar-nav ms-auto">
+
+                        <a class="blue btn btn-primary" style="margin-bottom:5px;" href="{% url 'login_user' %}">مشترك
+                                بالفعل <i class="bi bi-person-check-fill"></i></a>
+                        <a class=" red btn btn-outline-success" href="{% url 'register_user' %}">اشتراك جديد <i
+                                        class="bi bi-person-plus-fill"></i> </a>
+                </div>
+
+        </div>
+</nav>
+
+{% endif %}

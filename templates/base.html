@@ -1,0 +1,87 @@
+<!DOCTYPE html>{% load static %}
+<html lang="ar" dir="rtl">
+
+<head>
+    <script type="text/javascript" src="{% static 'main/js/device_cookie.js' %}"></script>
+    <!--bootstrap -V 5.1.3x-->
+    <title>{{title}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'main/css/lib/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/lib/bootstrap-icons.css' %}">
+
+    <!-- CSS Style and Aos Animation library -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'main/css/aos-master/dist/aos.css' %}"> -->
+    <link rel="icon" href="{% static 'main/img/logo/logo.png' %}">
+    <!-- font awesome -->
+    <script defer src="{% static 'main/fontawesome/js/all.js' %}"></script>
+    <!--load all styles -->
+    <link href="{% static 'main/fontawesome/css/all.css' %}" rel="stylesheet">
+    <!--load all styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--jquery -V 3.6.0-->
+    <script>
+        function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+    </script>
+</head>
+
+<body>
+
+    {% include "navbar.html" %}
+
+    {% block content %}
+
+    {% endblock content %}
+
+    {% if  request.get_full_path == '/' %}
+    {% include "footer.html" %}
+    {% endif %}
+
+    <script type="text/javascript" src="{% static 'main/js/lib/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/lib/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/lib/aos.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/main.js' %}"></script>
+    <script src="{% static 'main/css/aos-master/dist/aos.js' %}"></script>
+    <script>
+        AOS.init({
+            offset: 200,
+            duration: 800,
+            easing: 'ease',
+            delay: 600,
+        });
+    </script>
+
+    <script async src="{% static 'main/' %}js/fp.min.js" onload="initFingerprintJS()"></script>
+    <script>
+        function initFingerprintJS() {
+            FingerprintJS.load().then(fp => {
+                // The FingerprintJS agent is ready.
+                // Get a visitor identifier when you'd like to.
+                fp.get().then(result => {
+                    // This is the visitor identifier:
+                    const visitorId = result.visitorId;
+                    document.cookie = 'device=' + visitorId + ";domain=;path=/;Max-Age=31536000000"
+                });
+            });
+        }
+    </script>
+
+
+</body>
+
+</html>

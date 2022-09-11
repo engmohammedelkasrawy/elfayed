@@ -1,0 +1,99 @@
+{% load static %}
+<div class="col-3">
+    <div class="navigation active">
+        <ul>
+            <li>
+                <a href="{% url 'profile' %}">
+                    <span class="icon"><i class="bi bi-person-fill"></i></span>
+                    <span class="title" style="font-size:25px;">عمر خالد السيد</span>
+                </a>
+            </li>
+
+
+
+            <a class=" btn-toggle  btn btn-info mode"> 🌞 🌙 </a>
+
+            <li>
+                <a href="{% url 'profile' %}">
+
+                    <span class="icon"><i class="icona bi bi-house-fill"></i></span>
+                    <span class="title"> صفحتك الرئيسية </span>
+                </a>
+            </li>
+            {% if request.user.is_staff %}
+            <li>
+                    <a href="/dashboard/">
+                        <span class="icon"><i class="bi bi-archive-fill"></i></span>
+                        <span class="title"> لوحة التحكم  </span>
+                    </a>
+                </li>
+            
+            {% endif %}
+            <!-- <li>
+                    <a href="Notifications.html">
+
+                        <span class="icon"><i class="icona bi bi-bell-fill"></i></span>
+                        <span class="Notification">55</span>
+                        <span class="title"> صفحة الاشعارات </span>
+                    </a>
+                </li> -->
+
+
+            <li>
+                <a href="{% url 'student_info' %}">
+                    <span class="icon"><i class="icona bi bi-person-check-fill"></i></span>
+                    <span class="title"> الملف الشخصي </span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{% url 'off_videos' %}">
+                    <span class="icon"> <i class="bi bi-play-btn-fill"></i></span>
+
+                    <span class="title"> الفيديوهات المحجوزة </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'on_videos' %}">
+                    <span class="icon"> <i class=" icona bi bi-play-btn-fill"></i></span>
+
+                    <span class="title"> الفيديوهات الخاصة بك </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'quizzes' %}">
+                    <span class="icon"><i class="icona bi bi-patch-check-fill"></i></span>
+                    <span class="title"> الكويزات والاختبارات</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'quiz_result' %}">
+                    <span class="icon"><i class="icona bi bi-card-checklist"></i></span>
+                    <span class="title">درجات الكويزات</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{% url 'register_videos' %}">
+                    <span class="icon"><i class="icona bi bi-wallet2"></i></span>
+                    <span class="title"> حجز درس جديد</span>
+                </a>
+            </li>
+
+
+
+            <li>
+                <a href="{% url 'logout_user' %}">
+                    <span class="icon"><i class=" icona bi bi-box-arrow-right"></i></span>
+                    <span class="title">الخروج</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</div>

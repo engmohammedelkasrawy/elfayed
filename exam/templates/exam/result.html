@@ -1,0 +1,171 @@
+<!DOCTYPE html>{% load static %}
+<html lang="ar" dir="rtl">
+
+<head>
+    <title>Document</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -V 5.1.3x -->
+    <!-- bootstrap -V 5.1.3x -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/Quezes.css">
+
+
+
+</head>
+
+<body>
+
+
+    <!-- Scroll Right -->
+    <div id="progressbar"></div>
+    <div id="scrollPath"></div>
+
+    <nav class="navbar navbar-expand-lg position-sticky top-0 w-100 en" style="z-index: 99;">
+
+        <div class="container">
+            <a href="#" class="logo"> <img src="{% static 'main/' %}Images/geology.png" alt=""></a>
+            <h1 class="text-light">Alfayed</h1>
+
+            <div class="navbar-nav ms-auto">
+                <!-- <a  class=" btn-toggle  btn btn-info mode">🌙 Light  🌞 | Dark </a> -->
+                <a class="blue btn btn-primary" href="{% url 'profile' %}">
+                    الصفحة الشخصية <i class="bi bi-person-check-fill"></i></a>
+                <a class=" red btn btn-outline-danger" href="{% url 'logout_user' %}"> تسجيل الخروج <i
+                        class="bi bi-box-arrow-in-right"></i> </a>
+
+                <a class=" btn-toggle  btn btn-info mode"> 🌞 🌙 </a>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <section class="Quiz_main mt-5 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="classText">
+                    <h2 class="text-center mb-5">
+                        {{quiz.title}}
+                    </h2>
+                </div>
+                <div class=" home-stats text-center">
+                    <div class="row DashCards">
+                        <div class="col-md-4">
+
+                            <div class="stat tmembers">
+                                <span class="logoIcon"> <img src="Images/undraw_my_answer_re_k4dv (1).svg"
+                                        alt=""></span>
+                                <div class="info">
+                                    <strong> اجاباتك الصحيحة</strong>
+                                    <span>{{user_Answer_true}} اجابة</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="stat tpending">
+                                <span class="logoIcon"> <img src="Images/undraw_my_answer_re_k4dv (1).svg"
+                                        alt=""></span>
+                                <div class="info">
+                                    <strong> الدرجة الكلية من</strong>
+                                    <span> {{quiz.get_grade}} اجابة</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="stat titems">
+                                <span class="logoIcon"> <img src="Images/undraw_survey_05s5.svg" alt=""></span>
+                                <div class="info">
+                                    <strong> درجاتك الكلية</strong>
+                                    <span> {{grade}} درجة</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+
+    <section class="Questions mt-5 ">
+        <div class="container">
+            <div class="row">
+                {% for qu  in quiz.get_questions %}
+                <div class="col-md-12">
+                    <span class="question-num">1</span>
+                    <div class="card mb-4 shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">{{qu.text|safe}}</h5>
+                            <hr>
+
+                            {% if qu in question_mistakes  %}
+                            <div class="col-md-12">
+                                <div class="card bg-warning mt-5">
+                                    <div class="card-body">
+                                        <p class="card-text">اجبتك كانت غلط و الاجابة الصح كانت   {{qu.get_answers_true|safe}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-12">
+                                <div class="card bg-success text-white mt-5">
+                                    <div class="card-body">
+
+                                        <p class="card-text">اجبتك صح {{qu.get_answers_true|safe}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-3 d-flex justify-content-around flex-column">
+                <button onclick="history.back()" class="btn btn-primary btn-lg rounded-pill mt-5 mb-5">
+                    اجباتك
+                    <i class="fas fa-backward"></i>
+                </button>
+                <a href="{% url 'quiz_result' %}" class="btn btn-outline-primary btn-lg rounded-pill mb-5 shadow">جميع
+                    النتائج السابقة</a>
+            </div>
+        </div>
+
+
+    </section>
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        $(window).on('load', function () {
+            $('#exampleModal').modal('show');
+        });
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
+
+    <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>
+</body>
+
+</html>

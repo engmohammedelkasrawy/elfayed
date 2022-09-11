@@ -1,0 +1,98 @@
+<!DOCTYPE html>{% load static %}
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <title>{{title}} </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <!-- bootstrap -V 5.1.3x -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css" />
+
+    <!-- CSS Style and Aos Animation library -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/Forms.css" />
+
+    <!-- font awesome -->
+    <link href="{% static 'main/' %}fontawesome/css/all.css" rel="stylesheet" />
+
+</head>
+
+
+<body>
+    
+
+    <img class="wave" src="{% static 'main/' %}Images/wave.png">
+    <div class="container">
+        <div class="register-content">
+            <form id="form" method="post" class="form-horizontal" data-year-url="{% url 'ajax_load_year_lessons' %}">
+                {% csrf_token %}
+                <h2 class="title">اضافة كويز</h2>
+                <div id="quezName" class="input-div">
+
+                    <div class="i">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+
+                    <div class="div">
+
+                        <h5>اسم الكويز</h5>
+                        <input type="text" class="input" name="title" required>
+
+                    </div>
+                </div>
+                <div id="quezDesc" class="input-div">
+                    <div class="i">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+                    <div class="div">
+                        <h5> وصف الكويز</h5>
+                        <input type="text" class="input" name="description" required">
+                    </div>
+                </div>
+
+                <div class="div">
+                    <select id="id_year" class="select" class="input" name="year">
+                        <option selected>اختر الصف الدراسي</option>
+                        <option value="1">الصف الاول الثانوي</option>
+                        <option value="2">الصف الثاني الثانوي</option>
+                        <option value="3">الصف الثالث الثانوي</option>
+                    </select>
+                </div>
+                <div class="div">
+                    <select id="stages" class="select" class="input" name="lesson">
+                        <option selected>اختر الدرس </option>
+                    </select>
+                </div>
+
+                <input type="submit" class="btnLogin" style="background-color: #007bff;" value="اضافة الكويز">
+
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'main/js/lib/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>
+    <script>
+        $("#id_year").on("change", function () {
+            
+            const url = $(".form-horizontal").attr("data-year-url"); // get the url of the `load_cities` view
+            const year_id = $(this).val(); // get the selected country ID from the HTML input
+            $.ajax({
+                url: url,
+                data: {
+                    'year_id': year_id
+                },
+                success: function (data) {
+                    console.log(data);
+                    // let html_data = '<option value="">الفرع والوحدة</option>';
+                    // data.forEach(function (branch) {html_data += `<option value="${branch.id}">${branch.name}</option>`});
+                    // console.log(html_data);
+                    $("#stages").html(data);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

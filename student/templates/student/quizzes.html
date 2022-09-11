@@ -1,0 +1,80 @@
+<!DOCTYPE html>{% load static %}
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <title> {{title}}</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+
+    <!-- bootstrap -V 5.1.3x -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css">
+
+    <!-- CSS Style and Aos Animation library -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/pages.css">
+
+
+    <!-- font awesome -->
+    <link href="{% static 'main/' %}fontawesome/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <a href="#" class="logo"> <img src="{% static 'main/' %}Images/undraw_profile_pic_ic-5-t.svg" alt=""></a>
+    <div class="containe">
+        <div class="row">
+            {% include 'student/sidebar.html' %}
+        </div>
+
+        <div class="main active">
+
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="bi bi-list"></i>
+                </div>
+            </div>
+            <div class="classText">
+
+                <h2> الكويزات والاختبارات</h2>
+            </div>
+            <!-- cards -->
+            <div class=" home-stats text-center">
+                <div class="row DashCards active">
+                    {% for quiz in quizes %}
+                   
+                    
+                    <div class='col-md-3'>
+                        <a href="{% url 'quiz' quiz.id %}">
+                            <div class='img-thumbnail item-box'>
+                                <img class="logo" src="{% static 'main/' %}Images/undraw_online_test_gba7.svg"
+                                    height="200px" width="100%" alt="">
+                                <div class='caption'>
+                                    <h3>{{quiz.title}}</h3>
+                                    
+                                    <span> امتحن الأن</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Scripts Links  -->
+
+        <script type="text/javascript" src="{% static 'main/' %}js/lib/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'main/' %}js/lib/bootstrap.bundle.min.js"></script>
+
+        <!--load all styles  fontawesome-->
+        <script defer src="{% static 'main/' %}fontawesome/js/all.js"></script>
+
+        <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>{% load static %}
+<html lang="ar">
+
+<head>
+
+    <title> {{title}}</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <!-- bootstrap -V 5.1.3x -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css" />
+
+    <!-- CSS Style and Aos Animation library -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/Forms.css" />
+
+    <!-- font awesome -->
+    <link href="{% static 'main/' %}fontawesome/css/all.css" rel="stylesheet" />
+    <script>
+        // Initialize the agent at application startup.
+        const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
+            .then(FingerprintJS => FingerprintJS.load())
+
+        // Get the visitor identifier when you need it.
+        fpPromise
+            .then(fp => fp.get())
+            .then(result => {
+                // This is the visitor identifier:
+                const visitorId = result.visitorId
+                document.cookie = 'device=' + visitorId + ";domain=;path=/;Max-Age=31536000000"
+            })
+    </script>
+</head>
+
+<body>
+
+    <img class="wave" src="{% static 'main/' %}Images/wave.png">
+
+    <div class="container">
+
+
+        <div class="img">
+            <img src="{% static 'main/' %}Images/login2.svg">
+        </div>
+        <div class="register-content">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form id="form" method="post" class="form-horizontal">
+                {% csrf_token %}
+                <img src="{% static 'main/' %}Images/undraw_profile_pic_ic-5-t.svg">
+                <h2 class="title">مرحبا بك</h2>
+                <div id="PhoneNumber" class="input-div">
+                    <div class="i">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="div">
+                        <h5>رقم الهاتف</h5>
+                        <input id="phone" type="text" class="input" name="username" maxlength="11" required>
+                        <span class="check"></span>
+                    </div>
+                </div>
+                </ul>
+                <div id="Password" class="input-div password">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+
+                    <div class="div">
+                        <h5> الرقم السري الخاص بك</h5>
+                        <input id="password" type="password" class="input" name="password" required>
+                    </div>
+
+                </div>
+
+                <a href="{% url 'ask_reset_password' %}" style="color: #aca200; margin-top:10px">هل نسيت رقمك السري؟</a>
+
+                <input type="submit" class="btnLogin  Btn" style="background-color: #218838 !important;"
+                    value="تسجيل الدخول">
+                <!-- new -->
+                <a href="{% url 'register_user' %}" class="btnLogin"
+                    style="background-color:#007bff !important; text-align: center;">اشتراك جديد</a>
+
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>{% load static %}
+<html lang="ar" dir="rtl">
+
+<head>
+    <title>{{title}}</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+
+
+    <!-- bootstrap -V 5.1.3x -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css">
+
+
+    <!-- CSS Style and  table library -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/pages.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- font awesome -->
+    <link href="{% static 'main/' %}fontawesome/css/all.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+
+    <a href="#" class="logo"> <img src="{% static 'main/' %}Images/geology.png" alt=""></a>
+    <div class="containe">
+        <div class="row">
+            {% include 'dashboard/sidebar.html' %}
+        </div>
+    </div>
+
+    <div class="main">
+
+        <div class="topbar">
+            <div class="toggle">
+                <i class="bi bi-list"></i>
+            </div>
+        </div>
+        <div class="classText">
+
+            <h2> تفعيل الاشتراكات لجميع الطلاب </h2>
+        </div>
+        <!-- cards -->
+        <div class=" home-stats   text-center">
+
+            <div class="row  infoTable ">
+                <div class="col-10">
+                    <table id="table_id" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">id lesson</th>
+                                <th scope="col">اسم الطالب</th>
+                                <th scope="col">الصف الدراسي</th>
+                                <th scope="col">رقم الهاتف</th>
+                                <th scope="col"> تاريخ الاشتراك </th>
+                                <th scope="col">التحكم</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lesson in lesson_Anactie %}
+                            <tr>
+                                <td scope="row">{{lesson.id}}</td>
+                                <td>{{lesson.student.fullName}}</td>
+                                <td>{{lesson.student.year}}</td>
+                                <td>{{lesson.student.user}}</td>
+                                <td> {{lesson.created|date:"j/m/Y "}}</td>
+                                <td>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="lesson_id" value="{{lesson.id}}">
+                                        <button type="submit" name="done" class="btn btn-success">تأكيد</button>
+                                        <button type="submit" name="rejected" class="btn btn-danger">الغاء</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <script type="text/javascript" src="{% static 'main/' %}js/lib/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'main/' %}js/lib/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="{% static 'main/' %}js/lib/aos.js"></script>
+
+
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js">
+        </script>
+        <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>
+</body>
+
+</html>

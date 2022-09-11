@@ -1,0 +1,4 @@
+<option value="0">اختر الدرس</option>
+{% for lesson in lessons %}
+<option value="{{lesson.id}}">{{lesson.name}}</option>
+{% endfor %}

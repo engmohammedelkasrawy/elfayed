@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+
+    <title>{{title}}</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- CSS Style and fontawesome library-->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/Forms.css">
+    <link href="{% static 'main/' %}fontawesome/css/all.css" rel="stylesheet">
+    <!-- bootstrap -V 5.1.3x -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/' %}css/lib/bootstrap.min.css" />
+    <!-- video library -->
+    <link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" />
+    <script>
+        // Initialize the agent at application startup.
+        const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
+            .then(FingerprintJS => FingerprintJS.load())
+
+        // Get the visitor identifier when you need it.
+        fpPromise
+            .then(fp => fp.get())
+            .then(result => {
+                // This is the visitor identifier:
+                const visitorId = result.visitorId
+                document.cookie = 'device=' + visitorId + ";domain=;path=/;Max-Age=31536000000"
+            })
+    </script>
+
+</head>
+
+<body>
+
+    <img class="wave waveRegister" src="{% static 'main/' %}Images/wave.png">
+
+    <div class="container">
+
+
+        <div class="img">
+            <img src="{% static 'main/' %}Images/login2.svg">
+        </div>
+
+        <div class="register-content">
+
+            <form id="registerForm" method="post" class="form-horizontal" style="height: 600px;">
+                {% csrf_token %}
+                <img src="{% static 'main/' %}Images/undraw_profile_pic_ic-5-t.svg">
+                <h2 class="title">مرحبا بك</h2>
+
+
+                <div class="input-div main {% if userForm.errors or studentForm.errors %}focus{% endif %}">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5> الأسم كاملا</h5>
+                        <input type="text" class="input" name="fullName"
+                            value="{% if studentForm.fullName.value %}{{studentForm.fullName.value}}{% endif %}"
+                            required>
+                    </div>
+                </div>
+                <ul class="Error">
+                    {% for i in studentForm.errors.fullName %}
+                    <li>
+                        {{ i }}
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div id="PhoneNumber"
+                    class="input-div main {% if userForm.errors or studentForm.errors %}focus{% endif %}">
+                    <div class="i">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="div">
+                        <h5>رقم الهاتف</h5>
+                        <input id="phone" type="text" class="input" name="username" onkeyup="validatePhone();"
+                            minlength="11" maxlength="11" required
+                            value="{% if userForm.username.value %}{{userForm.username.value}}{% endif %}">
+                        <span class="check"></span>
+                    </div>
+                </div>
+                <ul class="Error">
+                    {% for i in userForm.errors.username %}
+                    <li>
+                        {{ i }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div id="PhoneNumberParent"
+                    class="input-div main {% if userForm.errors or studentForm.errors %}focus{% endif %}">
+                    <div class="i">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="div">
+                        <h5>رقم ولي الأمر</h5>
+                        <input id="phoneParent" type="text" class="input" name="ParentPhone" minlength="11"
+                            maxlength="11" required
+                            value="{% if studentForm.ParentPhone.value %}{{studentForm.ParentPhone.value}}{% endif %}">
+                        <span class="check"></span>
+                    </div>
+                </div>
+                <ul class="Error">
+                    {% for i in userForm.errors.username %}
+                    <li>
+                        <span class="text-danger fw-bold">{{ i }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="div">
+                    <select class="select" class="input" name="year" required>
+                        <option value="0">اختر الصف الدراسي</option>
+                        <option value="1">الصف الاول الثانوي</option>
+                        <option value="2">الصف الثاني الثانوي</option>
+                        <option value="3">الصف الثالث الثانوي</option>
+                    </select>
+                </div>
+                <ul class="Error">
+                    {% for i in studentForm.errors.year %}
+                    <li>
+                        <span class="text-danger fw-bold">{{ i }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+
+
+                <div class="input-div main {% if userForm.errors or studentForm.errors %}focus{% endif %}">
+                    <div class="i">
+                        <i class="fas fa-solid fa-address-card"></i>
+                    </div>
+                    <div class="div">
+                        <h5> العنوان كاملا </h5>
+                        <input type="text" class="input" name="address"
+                            value="{% if studentForm.address.value %}{{studentForm.address.value}}{% endif %}" required>
+                    </div>
+                </div>
+
+
+                <div id="Password"
+                    class="input-div password {% if userForm.errors or studentForm.errors %}focus{% endif %}">
+
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+
+                    <div class="div">
+                        <h5> الرقم السري الخاص بك</h5>
+                        <input id="password" type="password" class="input" name="password1"
+                            onkeyup="validatePassword();" minlength="8" required>
+                        <span class="check"></span>
+                    </div>
+
+                </div>
+
+                <div id="PasswordConfirm"
+                    class="input-div password {% if userForm.errors or studentForm.errors %}focus{% endif %}">
+
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+
+                    <div class="div">
+                        <h5> ادخل الرقم السري للتأكيد </h5>
+                        <input id="passwordConf" type="password" class="input" name="password2"
+                            onkeyup="validatePasswordConfirm();" minlength="8" required>
+                        <span class="check"></span>
+                    </div>
+
+                </div>
+                <ul class="Error">
+                    {% for i in userForm.errors.password2 %}
+                    <li>
+                        {{ i }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                <input type="submit" class="btnLogin Btn" style="background-color: #ffc100;" value="تسجيل الأشتراك">
+            </form>
+
+
+        </div>
+    </div>
+    </div>
+
+
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/' %}js/lib/bootstrap.bundle.min.js"></script>
+    
+    <script src="https://vjs.zencdn.net/7.19.2/video.min.js"></script>
+        <script type="text/javascript" src="{% static 'main/' %}js/main.js"></script>
+
+
+
+</body>
+
+</html>

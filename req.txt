@@ -1,0 +1,8 @@
+Django
+gunicorn 
+psycopg2-binary
+django-crispy-forms
+django-tinymce
+requests
+sentry-sdk
+twilio
